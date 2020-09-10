@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <title>Universe | March 3rd 2020 San Francisco Primary</title>
+
+    <link rel="shortcut icon" type="image/png" href="/images/favicon.png"/>
+    <meta name="description" content="Interactive San Francisco election results map – March 3rd, 2020 Primary Election" />
+    <meta name="keywords" content="San Francisco, Primary Election, March 3rd 2020, Politics">
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://elections.universe.app/06/75/2020P" />
+    <meta property="og:site_name" content="The Universe App" />
+    <meta property="og:title" content="Universe | March 3rd 2020 San Francisco Primary" />
+    <meta property="og:description" content="Interactive San Francisco election results map – March 3rd, 2020 Primary Election" />
+    <meta property="og:image" content="https://elections.universe.app/images/social/06752020P.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="fb:app_id" content="457089805150100" />
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-161177613-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('require', 'linkid');
+      gtag('config', 'UA-161177613-1');
+    </script>
+
+    <style>
+      * {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-overflow-scrolling: touch;
+        text-rendering: optimizeLegibility;
+        outline: none;
+        box-sizing: border-box;
+      }
+
+      @font-face {
+        font-family: "fontawesome";
+        src: url("/fonts/fontawesome/fa-solid-900.woff2");
+      }
+
+      @font-face {
+        font-family: "Jost";
+        font-weight: 200;
+        src: url("/fonts/Jost/Jost-200-Thin.otf");
+      }
+
+      @font-face {
+        font-family: "Jost";
+        font-weight: 400;
+        src: url("/fonts/Jost/Jost-400-Book.otf");
+      }
+
+      @font-face {
+        font-family: "Jost";
+        font-weight: 600;
+        src: url("/fonts/Jost/Jost-600-Semi.otf");
+      }
+
+      @font-face {
+        font-family: "ArcherPro";
+        src: url("/fonts/ArcherPro/ArcherPro-Semibold.otf");
+      }
+
+      html {
+        touch-action: manipulation;
+        font-size: 10px;
+      }
+      body {
+        --ios-pad: 0px;
+        font-family: sans-serif;
+        margin: 0;
+        overflow: hidden;
+        -webkit-overflow-scrolling: auto;
+        font-family: "ArcherPro", sans-serif;
+
+        --font-serif: "ArcherPro", serif;
+        --font-sans: "Jost", sans-serif;
+
+        --white: #f1f3f8;
+        --off-white: #eef0f5;
+        --black: #2C2C31;
+        --light-blue: #a6b6c4;
+        --blue: #2E71B2;
+        --dark-blue: #132f53;
+        --light-red: #e995a7;
+        --red: #E4264F;
+        --dark-red: #420b17;
+        --green: #059456;
+        --light-yellow: #e9c195;
+        --yellow: #FAA040;
+        --light-gray: rgba(0,0,0,.1);
+        --gray: #999999;
+
+        --elevation-0: 0 0 0 1px rgba(0, 0, 0, 0.01);
+        --elevation-2: 0 0 0 1px rgba(0, 0, 0, 0.01), 0 2px 3px rgba(0, 0, 0, 0.1);
+        --elevation-4: 0 0 0 1px rgba(0, 0, 0, 0.01), 0 4px 6px rgba(0, 0, 0, 0.1);
+        --elevation-6: 0 0 0 1px rgba(0, 0, 0, 0.01), 0 6px 9px rgba(0, 0, 0, 0.1);
+        --elevation-12: 0 0 0 1px rgba(0, 0, 0, 0.01), 0 12px 18px 1px rgba(0, 0, 0, 0.1);
+
+        --border-radius: 1.2rem;
+
+        --gradient: linear-gradient(-33deg, var(--red), 40%, var(--blue));
+
+        --font-stack: "fontawesome", "Jost", -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Fira Sans, Ubuntu,Oxygen, Oxygen Sans, Cantarell, Droid Sans, Apple Color Emoji, Segoe UI Emoji, Segoe UI Emoji, Segoe UI Symbol, Lucida Grande, Helvetica, Arial, sans-serif;
+        --serif-stack: "fontawesome", "ArcherPro", serif;
+
+        font-family: var(--font-stack);
+        touch-action: manipulation;
+        background-color: var(--white);
+        color: var(--black);
+      }
+
+      body.ios {
+        --ios-pad: 113px;
+      }
+
+      body.ios .popover {
+        margin: 0 14px 14px 0;
+      }
+
+      select {
+        -webkit-appearance: none;
+        appearance: none;
+        background: white;
+        height: 3.2rem;
+        margin-bottom: 0.8rem;
+        padding: 0 3.2rem 0 0.6rem;
+        font-size: 1.6rem;
+        font-family: var(--sans-stack);
+        border-radius: 4px;
+        transition: border-color .18s ease-in-out;
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23909eb2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+        background-position: top 10px right 9px;
+        background-size: 1.2rem;
+        background-repeat: no-repeat;
+        display: block;
+        width: 100%;
+      }
+
+
+      .toggle {
+        margin: 0 0 1.5rem; box-sizing: border-box;
+        font-size: 0;
+        display: flex; flex-flow: row nowrap;
+        justify-content: flex-start; align-items: stretch;
+      }
+      .toggle input { opacity: 0; pointer-events: none; position: absolute;}
+      .toggle input + label {
+        margin: 0;
+        box-sizing: border-box;
+        white-space: pre;
+        padding: 0.6rem 1rem;
+        color: var(--blue);
+        position: relative; display: inline-block;
+        border: solid 1px var(--blue);
+        background-color: white;
+        font-size: 1.2rem;
+        line-height: 140%;
+        font-weight: 600;
+        text-align: center;
+        box-shadow: 0 0 0 rgba(255,255,255,0);
+        transition:	border-color .15s ease-out,  color .15s ease-out,  background-color .15s ease-out, box-shadow .15s ease-out;
+
+        /* ADD THESE PROPERTIES TO SWITCH FROM AUTO WIDTH TO FULL WIDTH */
+        flex: 0 0 25%; display: flex; justify-content: center; align-items: center;
+        /* ----- */
+      }
+      .toggle input + label:first-of-type {border-radius: 6px 0 0 6px; border-right: none;}
+      .toggle input + label:last-of-type {border-radius: 0 6px 6px 0; border-left: none;}
+
+      .toggle input:hover + label {border-color: var(--blue);}
+      .toggle input:checked + label {
+        background-color: var(--blue);
+        color: var(--white);
+        box-shadow: var(--elevation-2);
+        border-color: var(--blue);
+        z-index: 1;
+      }
+      /* .toggle input:focus + label {@include focusOutline;} */
+
+      .ref-image {
+        width: 0;
+        height: 0;
+        opacity: 0;
+        position: absolute;
+      }
+
+      #main {
+        height: calc(100vh - var(--ios-pad));
+        width: 100vw;
+        top: 0;
+        left: 0;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+
+        --webkit-scroll-snap-stop: always;
+        --ms-scroll-snap-stop: always;
+        scroll-snap-stop: always;
+
+        -webkit-scroll-snap-type: mandatory;
+        -ms-scroll-snap-type: mandatory;
+        scroll-snap-type: mandatory;
+
+        -webkit-scroll-snap-type: y mandatory;
+        -ms-scroll-snap-type: y mandatory;
+        scroll-snap-type: y mandatory;
+
+        /* older spec implementation */
+        -webkit-scroll-snap-destination: 0% 100%;
+        -ms-scroll-snap-destination: 0% 100%;
+        scroll-snap-destination: 0% 100%;
+
+        -webkit-scroll-snap-points-y: repeat(100%);
+        -ms-scroll-snap-points-y: repeat(100%);
+        scroll-snap-points-y: repeat(100%);
+      }
+      #map {
+        height: 100vh;
+        width: 100vw;
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        transform: translate3d(0,0,0);
+      }
+      address {
+        white-space: pre;
+        text-decoration: none;
+        font-style: normal;
+        font-size: 1.4rem;
+      }
+      #padding {
+        display: block;
+        height: calc(100vh - 48px - 0px - var(--ios-pad));
+        width: 100%;
+        pointer-events: none;
+        z-index: 0;
+        position: relative;
+        scroll-snap-align: start;
+      }
+      #touchPad {
+        display: block;
+        height: 4.8rem;
+        width: 100%;
+        z-index: 1000;
+        position: relative;
+        font-size: 1.4rem;
+        margin: 0;
+        padding: 0 2.4rem;
+        box-sizing: border-box;
+        background: white;
+        border-radius: 1.8rem 1.8rem 0 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 1.2rem;
+      }
+      #touchPad::before {
+        content: "";
+        width: 12rem;
+        height: 0.6rem;
+        border-radius: 0.6rem;
+        position: absolute;
+        bottom: 3.6rem;
+        left: 50%;
+        background: rgba(0,0,0,.55);
+        transform: translateX(-50%);
+      }
+
+      #voters {
+        pointer-events: all;
+        width: 100%;
+        background: white;
+        padding: 0.8rem;
+        box-sizing: border-box;
+        margin: 0;
+        z-index: 999;
+        position: relative;
+        max-height: calc(50vh - var(--ios-pad));
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        box-shadow: 0 25vh 0 0 white;
+      }
+
+      #list {
+        pointer-events: all;
+        width: 100%;
+        background: transparent;
+        padding: 0;
+        margin: 0;
+        z-index: 999;
+        position: relative;
+        max-height: calc(50vh - var(--ios-pad) + 48px);
+        scroll-snap-align: end;
+        transform: translate3d(0,0,0);
+      }
+
+      #voters::before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: var(--pre-pad);
+      }
+
+      #voters::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: var(--post-pad);
+      }
+
+      #voters .voter {
+        position: relative;
+        box-sizing: border-box;
+        transition: background-color .28s;
+        display: flex;
+        padding: 0 0 0 1.4rem;
+      }
+
+      #voters .voter--highlight {
+        background-color: rgba(0,0,0,.08);
+      }
+
+      #voters .voter--first-in-household {
+        border-top: 1px solid rgba(0, 0, 0, .33);
+      }
+
+      #voters li {
+        list-style: none;
+      }
+
+      #voters li:first-of-type {
+        padding-top: 0;
+        border-top: 0 !important;
+      }
+
+      #voters li h2 {
+        font-size: 1.8rem;
+        font-family: sans-serif;
+        margin: 0 0 0.4rem;
+        display: flex;
+        text-align: left;
+      }
+
+      .voter__meta li {
+        content: "";
+        display: inline-block;
+        width: 2.4rem;
+        height: 1.8rem;
+        margin-right: 0.6rem;
+        font-size: 1.1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        line-height: 2rem;
+        letter-spacing: -1px;
+        font-weight: 800;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        color: transparent;
+        box-sizing: border-box;
+        text-indent: -1px;
+        margin: 0;
+        white-space: pre;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .voter__meta li.voter__party--D {
+        background-image: url('/walk/images/party/democratic.svg');
+      }
+      .voter__meta li.voter__party--R {
+        background-image: url('/walk/images/party/republican.svg');
+      }
+      .voter__meta li.voter__party--G {
+        background-image: url('/walk/images/party/green.svg');
+      }
+      .voter__meta li.voter__party--L {
+        background-image: url('/walk/images/party/libertarian.svg');
+      }
+      .voter__meta li.voter__party--NPP {
+        color: #999999;
+        background-image: none;
+        font-size: 1.2rem;
+      }
+
+      .voter__meta li.voter__gender {
+        font-weight: 600;
+        font-size: 1.3rem;
+      }
+
+      .voter__meta li.voter__gender--F {
+        color: hotpink;
+      }
+
+      .voter__meta li.voter__gender--M {
+        color: var(--blue)
+      }
+
+      .voter__meta li.voter__gender--U {
+        color: var(--gray)
+      }
+
+
+      .voter__meta li.voter__lang {
+        color: var(--gray);
+        box-shadow: 0 0 0 1px currentColor;
+        border-radius: 2px;
+        font-weight: 400;
+        max-height: 1.4rem;
+        padding: 1px 4px;
+        margin:  0.3rem 0 0 0;
+        line-height: 1rem;
+        text-transform: uppercase;
+        text-align: center;
+        display: flex;
+      }
+
+      .voter__meta li.voter__age {
+        color: var(--green);
+      }
+
+      .voter__meta li.voter__lang:not(.voter__lang--eng) {
+        color: darkorange;
+        font-weight: bold;
+      }
+
+      #voters li.voter--hsp h2::before {
+        content: "";
+        position: relative;
+        width: 1.3rem;
+        height: 1.3rem;
+        background: rgb(160, 116, 196);
+        border-radius: 50%;
+        margin-left: 0.6rem;
+        display: inline-block;
+      }
+
+      #center {
+        position: fixed;
+        right: 1.3rem;
+        bottom: 5.2rem;
+        width: 4.8rem;
+        height: 4.8rem;
+        border: 0;
+        background-color: white;
+        box-shadow: var(--elevation-6);
+        background-image: url(https://cdn2.iconfinder.com/data/icons/map-and-location/32/bullseye-512.png);
+        background-size: calc(100% - 20px);
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 50%;
+        z-index: 998;
+      }
+
+      .voter__toggle-input {
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .voter__toggle-label {
+        position: relative;
+        display: block;
+        width: 0;
+        height: auto;
+        padding: 2.6rem;
+        box-sizing: border-box;
+        height: 8.6rem;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+      }
+
+      .voter__toggle-label::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0.6rem;
+        width: 2.8rem;
+        height: 2.8rem;
+        border: 2px solid rgba(0,0,0,.55);
+        border-radius: 4px;
+        transform: translateY(-50%);
+      }
+      .voter__toggle-input:checked + .voter__toggle-label::after {
+        content: "";
+        border: 6px solid transparent;
+        border-top-color: green;
+        border-left-color: green;
+        position: absolute;
+        left: 1.3rem;
+        top: calc(50% - 5px);
+        transform: translateY(-50%) rotate(-145deg);
+        width: 0.7rem;
+        height: 1.9rem;
+      }
+
+      .voter__meta {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        margin-right: 1.4rem;
+      }
+
+      .voter__button {
+        flex-grow: 1;
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+      }
+
+      .popover-navigate {
+        background: green;
+        color: white;
+        display: block;
+        font-weight: bold;
+        text-decoration: none;
+        text-align: center;
+        padding: 4px;
+        border-radius: 2px;
+        margin-top: 8px;
+      }
+      .logo {
+        position: fixed;
+        top: 0.8rem;
+        left: 0.8rem;
+        z-index: 999;
+        width: 10rem;
+        background: white;
+        box-shadow: -10px 0 0 10px white;
+        border-radius: 0 0 1.4rem 0;
+        padding-right: 1.2rem;
+      }
+
+      @media (min-width: 51.2rem) {
+
+        .logo {
+          position: fixed;
+          top: 3.8rem;
+          left: 4.8rem;
+          width: 12rem;
+          z-index: 9999;
+          display: block;
+          box-shadow: none;
+          padding: 0;
+          border-radius: 0;
+        }
+        #padding { display: none; }
+
+        #list {
+          width: 51.2rem;
+          margin-left: calc(100vw - 51.2rem);
+          max-height: unset;
+          border-left: 1px solid #aaa;
+          transform: none;
+        }
+
+        #touchPad {
+          display: block;
+          position: fixed;
+          top: 0;
+          left: 2.4rem;
+          top: 2.4rem;
+          width: 54rem;
+          border-radius: 2.4rem;
+          height: 5.2rem;
+          box-shadow: var(--elevation-6);
+          background: white;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background: white;
+          border-radius: 0;
+          font-size: 1.8rem;
+          border-radius: 2.4rem;
+          box-sizing: border-box;
+          padding-left: 16.8rem;
+          padding-top: 0;
+        }
+
+        #touchPad::before {
+          display: none;
+        }
+
+        #touchPad::after {
+          border-radius: 0;
+          display: flex;
+          background: transparent;
+          position: relative;
+          text-align: left;
+          border-radius: 0;
+          border: 0;
+          box-shadow: none;
+        }
+
+        #voters {
+          height: 100vh;
+          max-height: unset;
+          position: fixed;
+          top: 2.6rem;
+          right: 2.6rem;
+          bottom: 2.6rem;
+          height: calc(100vh - 5.2rem);
+          border-radius: 2.6rem;
+          box-shadow: var(--elevation-6);
+          width: 51.2rem;
+          padding: 3.2rem;
+        }
+
+        #center {
+          right: calc(51.2rem + 4.8rem) ;
+          bottom: 2.4rem;
+        }
+        .voter__toggle-label::before {
+          left: 1.0rem;
+        }
+        .voter__toggle-input:checked + .voter__toggle-label::after {
+          left: 1.7rem;
+        }
+
+      }
+
+      @media print {
+
+        @page {
+          size: 8.5in 11in;
+          margin: 0in;
+        }
+
+        html { font-size: 9px; }
+        body { overflow: auto; }
+        #main { height: auto; }
+        #list { transform: none; }
+
+        #padding, #center, #touchPad::before { display: none !important; }
+
+        .voter {
+          flex-flow: row-reverse;
+          /* width: 50%;
+          display: inline-flex;
+          box-sizing: border-box; */
+        }
+
+        .voter__meta {
+          width: 4.8rem;
+          display: grid;
+          grid-template-columns: 50% 50%;
+          grid-template-rows: 50% 50%;
+          height: 4.8rem;
+        }
+
+        #touchPad {
+          position: fixed !important;
+          top: 0rem;
+          left: 0;
+          right: 0;
+          width: 100%;
+          box-shadow: 0;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background: white;
+          border-radius: 0;
+          font-size: 1.2rem;
+          height: 2.8rem;
+          box-shadow: none;
+          border: none;
+          padding: 1rem 2.4rem 0;
+        }
+
+        #touchPad::after {
+          border-radius: 0;
+          display: inline;
+          background: transparent;
+          position: relative;
+          text-align: left;
+          border-radius: 0;
+          border: 0;
+          box-shadow: none;
+          display: flex;
+        }
+
+        #map {
+          width: 100vw;
+          height: 50vh;
+          position: relative !important;
+          display: block;
+          page-break-before: avoid;
+          page-break-inside: avoid;
+          page-break-after: always;
+          pointer-events: none;
+        }
+
+        #voters, #list {
+          position: relative !important;
+          display: block;
+          width: 100vw;
+          height: auto;
+          max-height: unset;
+          margin: 0;
+          page-break-before: always;
+          page-break-after: always;
+          left: 0;
+        }
+
+        #voters .voter {
+          page-break-inside: avoid;
+          padding: 0 1.8rem;
+        }
+
+        #voters .voter:first-child {
+          margin-top: 4.2rem;
+        }
+
+        #voters .voter:nth-of-type(21n) {
+          page-break-before: always;
+          margin-top: 4.2rem;
+        }
+
+        .voter__toggle-label {
+          padding: 0.8rem 1.6rem 0.8rem 3.2rem;
+          height: 5.2rem;
+        }
+
+        .voter__toggle-label::before {
+          width: 1.4rem;
+          height: 1.4rem;
+          left: 0.8rem;
+        }
+
+      }
+
+      input[type=checkbox] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      input[type=checkbox] + label {
+        padding: 0.3rem 0.8rem;
+        border-radius: 1.6rem;
+        background-color: var(--white);
+        font-weight: bold;
+        box-shadow: var(--elevation-2);
+        transition: background-color .15s, color .15s, box-shadow .15s;
+        cursor: pointer;
+      }
+
+      input[type=checkbox] + label:hover {
+        box-shadow: var(--elevation-4);
+        background-color: var(--off-white);
+      }
+
+      input[type=checkbox]:checked + label {
+        background-color: var(--blue);
+        color: white;
+      }
+
+      .fieldset {
+        margin-bottom: 1.8rem;
+        display: grid;
+        grid-template-columns: repeat( auto-fit, 9.8rem);
+        grid-row-gap: 0.6rem;
+        grid-column-gap: 0.6rem;
+      }
+
+      .map__filter-label {
+        font-size: 1.6rem;
+        margin-bottom: 0.8rem;
+        display: block;
+        font-weight: bold;
+      }
+
+      .map__candidates {
+        width: 100%;
+        font-size: 1.4rem;
+        text-align: right;
+      }
+      .map__candidates td {
+        padding: 0.8rem 0.8rem;
+      }
+      .map__candidates th {
+        text-align: left;
+        padding-left: 0.8rem;
+      }
+      .map__candidates td:nth-of-type(2) {
+        text-align: left;
+        padding-left: 0.8rem;
+      }
+      .map__candidates td:nth-of-type(3), .map__candidates td:nth-of-type(4) {
+        font-family: var(--serif-stack);
+        font-variant-numeric: tabular-nums;
+
+      }
+
+      .map__candidates tr {
+        cursor: pointer;
+      }
+
+      .map__candidates td:first-of-type {
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .map__candidates tr:nth-child(1) td:first-of-type {
+        background: gold;
+      }
+
+      .map__candidates tr:nth-child(2) td:first-of-type {
+        background: silver;
+      }
+      .map__candidates tr:nth-child(3) td:first-of-type {
+        background: sandybrown;
+      }
+
+      .map__candidates .candidate--selected td, .map__candidates tr:hover td {
+        background-color: var(--white);
+      }
+
+      .map__candidates td:last-of-type {
+        padding-right: 0.8rem;
+      }
+
+      .map__candidates td:first-of-type {
+        border-left: 2px solid transparent;
+      }
+
+      .map__candidates td:last-of-type {
+        border-right: 2px solid transparent;
+      }
+
+      .map__candidates .candidate--selected td:first-of-type {
+        border-left: 2px solid var(--blue);
+      }
+
+      .map__candidates .candidate--selected td:last-of-type {
+        border-right: 2px solid var(--blue);
+      }
+
+      .email-form {
+        flex-grow: 1;
+        display: flex;
+        align-self: center;
+        width: 100%;
+      }
+      .email-form__name-input {
+        appearance: none;
+        font-size: 1.4rem;
+        border-radius: 0;
+        box-shadow: var(--elevation-2);
+        background-color: var(--white);
+        border: 0;
+        padding: 0.8rem;
+        border-right: 1px solid var(--light-gray);
+        flex-grow: 1;
+        width: 0;
+      }
+
+      .email-form__name-input:first-of-type {
+        border-radius: 1.8rem 0 0 1.8rem;
+        padding: 0.8rem 1.2rem;
+        margin-left: 2px;
+      }
+
+      .email-form__input {
+        appearance: none;
+        font-size: 1.4rem;
+        border-radius: 0;
+        box-shadow: var(--elevation-2);
+        background-color: var(--white);
+        border: 0;
+        padding: 0.8rem;
+        width: 0;
+        flex-grow: 2;
+      }
+      .email-form__submit {
+        border-radius: 0 1.8rem 1.8rem 0;
+        background-color: var(--blue);
+        padding: 0.8rem 1.2rem;
+        box-shadow: var(--elevation-2);
+        padding: 0.8rem 1.2rem;
+        font-size: 1.4rem;
+        color: white;
+        border: 0;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .email-form label.email-form__success {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        font-size: 1.6rem;
+        display: none;
+      }
+
+      .email-form.submitted input, .email-form.submitted button {
+        display: none;
+      }
+
+      .email-form.submitted label.email-form__success {
+        display: flex;
+      }
+
+      .twtr-btn, .fb-btn {
+        font-family: sans-serif;
+        box-shadow: var(--elevation-2);
+        width: auto;
+        margin: 1rem auto 1rem;
+        padding: 0px 8px 0 24px;
+        position: relative;
+        display: inline-block;
+        height: 24px;
+        border: 1px solid #ccc;
+        font-size: 12px;
+        color: #333;
+        text-decoration: none;
+        line-height: 22px;
+        font-weight: bold;
+        background-color: #1b95e0;
+        border: #1b95e0 solid 1px;
+        border-radius: 3px;
+        cursor: pointer;
+        overflow: hidden;
+        color: white;
+        position: relative;
+        z-index: 1;
+        margin-left: 8px;
+        min-width: 66px;
+      }
+      .fb-btn {
+        background-color: #4267b2;
+        border-color: #4267b2;
+      }
+      .fb-btn::before {
+        content: "";
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        top: 50%;
+        left: 4px;
+        margin-top: -8px;
+        background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTc5MiIgaGVpZ2h0PSIxNzkyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgoKIDxnPgogIDx0aXRsZT5iYWNrZ3JvdW5kPC90aXRsZT4KICA8cmVjdCBmaWxsPSJub25lIiBpZD0iY2FudmFzX2JhY2tncm91bmQiIGhlaWdodD0iNDAyIiB3aWR0aD0iNTgyIiB5PSItMSIgeD0iLTEiLz4KIDwvZz4KIDxnPgogIDx0aXRsZT5MYXllciAxPC90aXRsZT4KICA8cGF0aCBmaWxsPSIjZmZmZmZmIiBpZD0ic3ZnXzEiIGQ9Im0xNTc5LDEyOHEzNSwwIDYwLDI1dDI1LDYwbDAsMTM2NnEwLDM1IC0yNSw2MHQtNjAsMjVsLTM5MSwwbDAsLTU5NWwxOTksMGwzMCwtMjMybC0yMjksMGwwLC0xNDhxMCwtNTYgMjMuNSwtODR0OTEuNSwtMjhsMTIyLC0xbDAsLTIwN3EtNjMsLTkgLTE3OCwtOXEtMTM2LDAgLTIxNy41LDgwdC04MS41LDIyNmwwLDE3MWwtMjAwLDBsMCwyMzJsMjAwLDBsMCw1OTVsLTczNSwwcS0zNSwwIC02MCwtMjV0LTI1LC02MGwwLC0xMzY2cTAsLTM1IDI1LC02MHQ2MCwtMjVsMTM2NiwweiIvPgogPC9nPgo8L3N2Zz4=");
+        background-size: 16px;
+        background-repeat: no-repeat;
+      }
+      .twtr-btn::before {
+        content: "";
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        top: 50%;
+        left: 4px;
+        margin-top: -9px;
+        background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYuNjkzIiBoZWlnaHQ9IjU2LjY5MyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KCiA8Zz4KICA8dGl0bGU+YmFja2dyb3VuZDwvdGl0bGU+CiAgPHJlY3QgZmlsbD0ibm9uZSIgaWQ9ImNhbnZhc19iYWNrZ3JvdW5kIiBoZWlnaHQ9IjQwMiIgd2lkdGg9IjU4MiIgeT0iLTEiIHg9Ii0xIi8+CiA8L2c+CiA8Zz4KICA8dGl0bGU+TGF5ZXIgMTwvdGl0bGU+CiAgPHBhdGggZmlsbD0iI2ZmZmZmZiIgaWQ9InN2Z18xIiBkPSJtNTIuODM3LDE1LjA2NWMtMS44MTEsMC44MDUgLTMuNzYsMS4zNDggLTUuODA1LDEuNTkxYzIuMDg4LC0xLjI1IDMuNjg5LC0zLjIzIDQuNDQ0LC01LjU5MmMtMS45NTMsMS4xNTkgLTQuMTE1LDIgLTYuNDE4LDIuNDU0Yy0xLjg0MywtMS45NjQgLTQuNDcsLTMuMTkyIC03LjM3NywtMy4xOTJjLTUuNTgxLDAgLTEwLjEwNiw0LjUyNSAtMTAuMTA2LDEwLjEwN2MwLDAuNzkxIDAuMDg5LDEuNTYyIDAuMjYyLDIuMzAzYy04LjQsLTAuNDIyIC0xNS44NDgsLTQuNDQ1IC0yMC44MzMsLTEwLjU2Yy0wLjg3LDEuNDkyIC0xLjM2OCwzLjIyOCAtMS4zNjgsNS4wODJjMCwzLjUwNiAxLjc4NCw2LjYgNC40OTYsOC40MTJjLTEuNjU2LC0wLjA1MyAtMy4yMTUsLTAuNTA4IC00LjU3OCwtMS4yNjVjLTAuMDAxLDAuMDQyIC0wLjAwMSwwLjA4NSAtMC4wMDEsMC4xMjhjMCw0Ljg5NiAzLjQ4NCw4Ljk4IDguMTA4LDkuOTFjLTAuODQ4LDAuMjMgLTEuNzQxLDAuMzU0IC0yLjY2MywwLjM1NGMtMC42NTIsMCAtMS4yODUsLTAuMDYzIC0xLjkwMiwtMC4xODJjMS4yODcsNC4wMTUgNS4wMTksNi45MzggOS40NDEsNy4wMTljLTMuNDU5LDIuNzExIC03LjgxNiw0LjMyNyAtMTIuNTUyLDQuMzI3Yy0wLjgxNSwwIC0xLjYyLC0wLjA0OCAtMi40MTEsLTAuMTQyYzQuNDc0LDIuODY5IDkuNzg2LDQuNTQxIDE1LjQ5Myw0LjU0MWMxOC41OTEsMCAyOC43NTYsLTE1LjQgMjguNzU2LC0yOC43NTZjMCwtMC40MzggLTAuMDA5LC0wLjg3NSAtMC4wMjgsLTEuMzA5YzEuOTc0LC0xLjQyMiAzLjY4OCwtMy4yMDMgNS4wNDIsLTUuMjN6Ii8+CiA8L2c+Cjwvc3ZnPg==") 1px center no-repeat;
+        background-size: 16px;
+      }
+
+      .social-bar {
+        display: flex;
+        overflow: hidden;
+        flex-flow: column;
+        height: 0;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        transition: height .28s, padding .28s, margin .28s, border .28s;
+      }
+
+      .social-bar.open {
+        padding-bottom: 1.8rem;
+        border-bottom: 1px solid var(--white);
+        margin-bottom: 1.8rem;
+        height: 103px;
+      }
+
+      .map__social-label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .map__social-label span {
+        flex-grow: 1;
+      }
+
+      @media (max-width: 51.2rem) {
+
+        .map__candidates td {
+          height: 5.6rem;
+        }
+
+        .social-bar.open {
+          padding-bottom: 1.8rem;
+          border-bottom: 1px solid var(--white);
+          margin-bottom: 1.8rem;
+        }
+
+        .email-form__input {
+          flex-grow: 1.5;
+          font-size: 1.2rem;
+        }
+        .email-form__name-input {
+          font-size: 1.2rem;
+        }
+
+        .email-form__submit {
+          font-size: 0;
+          color: transparent;
+          width: 3.8rem;
+        }
+        .email-form__submit::before {
+          content: "";
+          width: 0;
+          height: 0;
+          border: 0.6rem solid transparent;
+          border-left-color: white;
+          margin-right: -0.6rem;
+        }
+
+      }
+
+    </style>
+  </head>
+  <body>
+    <img src="/images/map-icons/position.svg" id="position" class="ref-image" />
+
+    <main id="main">
+      <a href="https://universe.app" target="_blank"><img src="/images/universe.svg" alt="Universe Logo" class="logo" /></a>
+      <div id="map"></div>
+      <button id="center"></button>
+      <span id="padding"></span>
+      <section id="list">
+        <h1 id="touchPad">March 3rd 2020 San Francisco Primary</h1>
+        <ul id="voters">
+          <li>
+            <section id="social-bar" class="social-bar">
+              <label class="map__filter-label map__social-label" for="email-input">
+                <span>Stay updated on local elections:</span>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Felections.universe.app%2F06%2F75%2F2020P" id="fb-share" class="fb-btn">Share</a>
+                <a href="https://twitter.com/intent/tweet?hashtags=universeapp&related=universeapp&text=Local%20politics%20matter&url=https%3A%2F%2Felections.universe.app%2F06%2F75%2F2020P" id='twtr-share' class="twtr-btn">Tweet</a>
+              </label>
+              <form class='email-form' id='email-form' target="_blank" method="POST" action="https://api.universe.app/v1/email/subscribe">
+                <label class="email-form__success">Thanks for subscribing!</label>
+                <input type='text' placeholder="First Name" name="FNAME" class="email-form__name-input">
+                <input type='text' placeholder="Last Name" name="LNAME" class="email-form__name-input">
+                <input type='email' placeholder="Email" name="EMAIL" id="email-input" class="email-form__input">
+                <button class='email-form__submit' form='email-form'>Submit</button>
+                <input type='hidden' name='u' value='6b56ce91de42db2930dd99758'>
+                <input type='hidden' name='id' value='74b5983973'>
+                <input type="hidden" name="redirect" value="https://elections.universe.app/06/75/2020P" />
+                <input type="hidden" name="TAGS" value='06_75_2020P' />
+              </form>
+            </section>
+            <label class="map__filter-label" for="map-type">Map Type</label>
+            <div id="map-type" class="toggle">
+              <input type="radio" value="TURNOUT" id="map-type-turnout" name="map-type" checked>
+              <label for="map-type-turnout">Turnout</label>
+              <input type="radio" value="WINLOSE" id="map-type-winlose" name="map-type" checked>
+              <label for="map-type-winlose">Win / Lose</label>
+              <input type="radio" value="SUPPORT" id="map-type-support" name="map-type" checked>
+              <label for="map-type-support">Support</label>
+              <input type="radio" value="HOTSPOT" id="map-type-hotspot" name="map-type">
+              <label for="map-type-hotspot">Hotspot</label>
+            </div>
+
+            <label class="map__filter-label" for="campaign-dropdown">Race</label>
+            <select id="campaign-dropdown"></select>
+
+            <label class="map__filter-label" for="campaign-dropdown">Assembly District</label>
+            <section id="assembly-districts" class="fieldset">
+              <input type="checkbox" value="AD17" id="AD17" name="assembly-district"><label for="AD17">AD 17</label>
+              <input type="checkbox" value="AD19" id="AD19" name="assembly-district"><label for="AD19">AD 19</label>
+            </section>
+
+            <label class="map__filter-label" for="campaign-dropdown">Supervisor District</label>
+            <section id="supervisor-districts" class="fieldset">
+              <input type="checkbox" value="SD1" id="SD1" name="supervisor-district"><label for="SD1">District 1</label>
+              <input type="checkbox" value="SD2" id="SD2" name="supervisor-district"><label for="SD2">District 2</label>
+              <input type="checkbox" value="SD3" id="SD3" name="supervisor-district"><label for="SD3">District 3</label>
+              <input type="checkbox" value="SD4" id="SD4" name="supervisor-district"><label for="SD4">District 4</label>
+              <input type="checkbox" value="SD5" id="SD5" name="supervisor-district"><label for="SD5">District 5</label>
+              <input type="checkbox" value="SD6" id="SD6" name="supervisor-district"><label for="SD6">District 6</label>
+              <input type="checkbox" value="SD7" id="SD7" name="supervisor-district"><label for="SD7">District 7</label>
+              <input type="checkbox" value="SD8" id="SD8" name="supervisor-district"><label for="SD8">District 8</label>
+              <input type="checkbox" value="SD9" id="SD9" name="supervisor-district"><label for="SD9">District 9</label>
+              <input type="checkbox" value="SD10" id="SD10" name="supervisor-district"><label for="SD10">District 10</label>
+              <input type="checkbox" value="SD11" id="SD11" name="supervisor-district"><label for="SD11">District 11</label>
+            </section>
+
+            <label class="map__filter-label" for="campaign-dropdown">Neighborhood</label>
+            <section id="neighborhood-dropdown" class="fieldset"></section>
+          </li>
+          <li>
+            <label class="map__filter-label" id="table-title"></label>
+            <table class="map__candidates">
+              <thead>
+                <tr><th>Place</th><th id="table-name">Candidate</th><th>Votes</th><th>Percent</th></tr>
+              </thead>
+              <tbody id="election-results">
+
+              </tbody>
+            </table>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <script>
+
+      document.getElementById('email-form').addEventListener('submit', (evt) => {
+        evt.preventDefault();
+        evt.stopImmediatePropagation();
+        const form = evt.target;
+        const data = Object.fromEntries(new FormData(form).entries());
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json')
+        window.fetch(form.action, {
+          method: form.method,
+          headers: headers,
+          body: JSON.stringify(data),
+        });
+        document.getElementById('email-form').classList.add('submitted');
+      });
+
+        // The location of Uluru
+        const HEIGHT = 86;
+        const LIST_NUM = "%LIST_NUM%";
+        const LIST_ID = "%LIST_ID%";
+        const CENTROID = { lat: 37.7650, lng: -122.4000, };
+        const NAME_MAP = {
+          dem: 'Democratic',
+          rep: 'Republican',
+          npp: 'No Party Preference',
+          ai: 'American Independent',
+          pf: 'Peace and Freedom',
+          lib: 'Libertarian',
+          grn: 'Green',
+          misc: 'Other',
+        };
+        let open = null;
+        let active = null;
+        let map;
+
+        const households = new Map();
+        const householdCount = new Map();
+        const householdDone = new Map();
+        let prevScrollPosition = -1;
+
+        function numberWithCommas(x) {
+          return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function isIos() {
+          return /iPad|iPhone|iPod/.test(navigator.userAgent);
+        }
+        function mapLink(lat, lng) {
+          return isIos() ? `maps://maps.google.com/maps?daddr=${lat},${lng}&amp;ll=` : `https://maps.google.com/maps?daddr=${lat},${lng}&amp;ll=`;
+        }
+
+        async function initMap() {
+          let data = await (await window.fetch('/06/75/2020P/out.json')).json();
+          let pctMeta = await (await window.fetch('/06/75/2020P/pcts.json')).json();
+
+          const initial = window.location.search.slice(1);
+
+          const neighborhoods = new Set();
+          for (const pct of Object.values(pctMeta)) {
+            neighborhoods.add(pct.doeNeighborhood);
+          }
+
+          let mapType = ((/t=([^&]+)/gi).exec(window.location.search) || [])[1] || 'SUPPORT';
+          document.querySelector(`input[type=radio][value="${mapType}"]`).checked = true;
+          const contests = Object.keys(data);
+          contests.shift();
+
+          let contestName = contests[parseInt(((/e=(\d+)/gi).exec(window.location.search) || [])[1] || '') || 0];
+          let selectedCandidate = data.__META__.candidates[(((/c=([^&]+)/gi).exec(window.location.search) || [])[1] || -1)] || null;
+          let previewedCandidate = null;
+          let neighborhood = new Set((((/n=([^&]+)/gi).exec(window.location.search) || [])[1] || '').split(',').map(decodeURIComponent).filter(Boolean));
+          let assemblyDistrict = new Set((((/a=([^&]+)/gi).exec(window.location.search) || [])[1] || '').split(',').map(decodeURIComponent).filter(Boolean));
+          let supervisorDistricts = new Set((((/s=([^&]+)/gi).exec(window.location.search) || [])[1] || '').split(',').map(decodeURIComponent).filter(Boolean));
+
+          const campaignDropdown = document.getElementById('campaign-dropdown');
+          for (const name of contests) {
+            const op = document.createElement('option');
+            op.value = name;
+            op.innerText = name;
+            if (name === contestName) { op.setAttribute('selected', 'true'); }
+            campaignDropdown.appendChild(op);
+          }
+
+          const neighborhoodDropdown = document.getElementById('neighborhood-dropdown');
+          for (const contestName of neighborhoods) {
+            const checkbox = document.createElement('input');
+            checkbox.setAttribute('type', 'checkbox');
+            checkbox.value = contestName;
+            checkbox.id = contestName;
+            const label = document.createElement('label');
+            label.setAttribute('for', contestName);
+            label.innerText = contestName;
+            neighborhoodDropdown.appendChild(checkbox);
+            neighborhoodDropdown.appendChild(label);
+          }
+
+          const electionResults = document.getElementById('election-results');
+          campaignDropdown.addEventListener('change', (evt) => {
+            const el = evt.target;
+            contestName = el.options[el.selectedIndex].value;
+            selectedCandidate = null;
+            color();
+          });
+
+          document.getElementById('assembly-districts').addEventListener('change', (evt) => {
+            const el = evt.target;
+            if (el.checked) { assemblyDistrict.add(el.id); }
+            else { assemblyDistrict.delete(el.id); }
+            color();
+          });
+
+          document.getElementById('supervisor-districts').addEventListener('change', (evt) => {
+            const el = evt.target;
+            if (el.checked) { supervisorDistricts.add(el.id); }
+            else { supervisorDistricts.delete(el.id); }
+            color();
+          });
+
+          neighborhoodDropdown.addEventListener('change', (evt) => {
+            const el = evt.target;
+            if (el.checked) { neighborhood.add(el.id); }
+            else { neighborhood.delete(el.id); }
+            color();
+          });
+
+          document.getElementById('map-type').addEventListener('change', (evt) => {
+            const el = evt.target;
+            document.getElementById('social-bar').classList.add('open');
+            if (!el.checked) { return; }
+            mapType = el.value;
+            color();
+          });
+
+          electionResults.addEventListener('click', (evt) => {
+            let el = evt.target;
+            while (el && el !== evt.currentTarget && !el.dataset.candidate) {
+              el = el.parentNode;
+              if (el.dataset.candidate) {
+                selectedCandidate = el.dataset.candidate;
+                color();
+              }
+            }
+          });
+
+          electionResults.addEventListener('mouseleave', (evt) => {
+            previewedCandidate = null;
+          });
+
+          electionResults.addEventListener('mouseover', (evt) => {
+            let el = evt.target;
+            while (el && el !== evt.currentTarget && !el.dataset.candidate) {
+              el = el.parentNode;
+              if (el.dataset.candidate) {
+                previewedCandidate = el.dataset.candidate;
+                // color();
+              }
+            }
+          });
+
+          let HEAT = {};
+          let PCTSHEAT = {};
+          let candidateTotals = {};
+
+          function color() {
+
+            const values = [];
+            let contest = data[contestName];
+            let registration = 0;
+            let totalVotes = 0;
+            let partyRegistration = {};
+            HEAT = {};
+            PCTSHEAT = {};
+            candidateTotals = {};
+
+            while (electionResults.firstElementChild) {
+              electionResults.removeChild(electionResults.firstElementChild);
+            }
+
+            for (let id of [...neighborhood, ...assemblyDistrict, ...supervisorDistricts]){
+              const el = document.getElementById(id);
+              el && (el.checked = true);
+            }
+
+            const candidateSet = new Set();
+
+            for (let pctName of Object.keys(contest)) {
+              if (pctName === '__META__') { continue; }
+              if (neighborhood.size && !neighborhood.has(pctMeta[pctName].doeNeighborhood)) {
+                continue;
+              }
+
+              if (assemblyDistrict.size) {
+                if (!assemblyDistrict.has('AD17') && (pctName[0] === '7') || (pctName[0] === '1' && parseInt(pctName[2]) >= 4)) {
+                  continue;
+                }
+                if (!assemblyDistrict.has('AD19') && (pctName[0] === '9') || (pctName[0] === '1' && parseInt(pctName[2]) < 4)) {
+                  continue;
+                }
+              }
+
+              if (supervisorDistricts.size) {
+                if (!supervisorDistricts.has('SD1') && (pctName[1] === '1' && pctName[0] !== '1')) { continue; }
+                if (!supervisorDistricts.has('SD2') && (pctName[1] === '2' && pctName[0] !== '1')) { continue; }
+                if (!supervisorDistricts.has('SD3') && (pctName[1] === '3' && pctName[0] !== '1')) { continue; }
+                if (!supervisorDistricts.has('SD4') && (pctName[1] === '4' && pctName[0] !== '1')) { continue; }
+                if (!supervisorDistricts.has('SD5') && (pctName[1] === '5' && pctName[0] !== '1')) { continue; }
+                if (!supervisorDistricts.has('SD6') && (pctName[1] === '6' && pctName[0] !== '1')) { continue; }
+                if (!supervisorDistricts.has('SD7') && (pctName[1] === '7' && pctName[0] !== '1')) { continue; }
+                if (!supervisorDistricts.has('SD8') && (pctName[1] === '8' && pctName[0] !== '1')) { continue; }
+                if (!supervisorDistricts.has('SD9') && (pctName[1] === '9' && pctName[0] !== '1')) { continue; }
+                if (!supervisorDistricts.has('SD10') && (pctName[1] === '0' && pctName[0] !== '1')) { continue; }
+                if (!supervisorDistricts.has('SD11') && (pctName[0] === '1')) { continue; }
+              }
+
+              const pct = contest[pctName];
+              let pctPcts = {};
+              let totalPctVotes = pct.turnout.all || 0;
+              let totalPctReg = pctMeta[pctName].registration[contest.__META__.party || 'all'];
+              if (contest.__META__.party !== 'all') {
+                totalPctReg += pctMeta[pctName].registration['npp'];
+              }
+
+              totalVotes += totalPctVotes;
+              registration += totalPctReg || 0;
+
+              PCTSHEAT[pctName] = pctPcts;
+
+              if (mapType === 'TURNOUT') {
+                candidateTotals.TOTAL = (candidateTotals.TOTAL || 0) + (totalPctReg || 0);
+                for (let party of Object.keys(pct.turnout)) {
+                  if (party === 'all') { continue }
+                  candidateSet.add(party);
+                  pctPcts[party] = pct.turnout[party] / (pctMeta[pctName].registration[party] || 1);
+                  candidateTotals[party] = (candidateTotals[party] || 0) + (pct.turnout[party] || 0);
+                  partyRegistration[party] = (partyRegistration[party] || 0) + (pctMeta[pctName].registration[party] || 0)
+                  if (!isNaN(pctPcts[party])) { values.push(pctPcts[party]); }
+                }
+              }
+              else {
+                candidateTotals.TOTAL = (candidateTotals.TOTAL || 0) + (totalPctVotes || 0);
+                for (let candidateName of Object.keys(pct)) {
+                  if (candidateName === 'TOTAL' || candidateName === 'Write-in' || candidateName === 'turnout' ) { continue }
+                  candidateSet.add(candidateName);
+                  candidateTotals[candidateName] = (candidateTotals[candidateName] || 0) + (pct[candidateName] || 0);
+                  pctPcts[candidateName] = pct[candidateName] / totalPctVotes;
+                  if (mapType !== 'HOTSPOT' && !isNaN(pctPcts[candidateName])) { values.push(pctPcts[candidateName]); }
+                }
+              }
+            }
+
+            document.getElementById('table-title').innerText = `${numberWithCommas(totalVotes)} cast of ${numberWithCommas(registration)} voters (${((totalVotes / (registration || 1)) * 100).toFixed(2)}% turnout)`
+
+            let candidate = previewedCandidate || selectedCandidate;
+
+            const candidates = [...candidateSet].sort((a, b) => {
+              return candidateTotals[a] > candidateTotals[b] ? -1 : 1;
+            });
+
+            if (!candidateSet.has(candidate)) { selectedCandidate = candidate = candidates[0]; }
+
+            for (let pctName of Object.keys(contest)) {
+              if (pctName === '__META__' ) { continue; }
+              let pctPcts = PCTSHEAT[pctName];
+              if (!pctPcts) { continue; }
+              const vals = Object.values(pctPcts).filter((n) => !isNaN(n))
+              const winners = new Set(vals.sort().slice(contest.__META__.seats * -1));
+              HEAT[pctName] = [pctPcts[candidate], Math.min(...vals), Math.max(...vals), winners.has(pctPcts[candidate])];
+              !isNaN(pctPcts[candidate]) && values.push(pctPcts[candidate]);
+            }
+
+            let idx = 0;
+            if (mapType === 'TURNOUT') {
+              document.getElementById('table-name').innerText = 'Party';
+            }
+            else {
+              document.getElementById('table-name').innerText = 'Candidate';
+            }
+            for (let c of candidates) {
+              const TR = document.createElement('tr');
+              TR.dataset.candidate = c;
+              if (selectedCandidate === c) {
+                 TR.classList.add('candidate--selected');
+              }
+              const idxCell = document.createElement('td');
+              idxCell.innerText = ++idx;
+              TR.appendChild(idxCell);
+              const name = document.createElement('td');
+              name.innerText = NAME_MAP[c] || c;
+              TR.appendChild(name);
+              const votes = document.createElement('td');
+              TR.appendChild(votes);
+              const percent = document.createElement('td');
+              if (mapType === 'TURNOUT') {
+                votes.innerText = `${numberWithCommas(candidateTotals[c] || 0)} / ${numberWithCommas(partyRegistration[c] || 0)}`;
+                percent.innerText = ((candidateTotals[c] || 0)/ (partyRegistration[c] || 0) * 100).toFixed(2) + '%';
+              }
+              else {
+                votes.innerText = numberWithCommas(candidateTotals[c] || 0);
+                percent.innerText = ((candidateTotals[c] || 0)/ (candidateTotals.TOTAL || 0) * 100).toFixed(2) + '%';
+              }
+              TR.appendChild(percent);
+              electionResults.appendChild(TR);
+            }
+
+            const min = Math.min(...values);
+            const max = Math.max(...values);
+
+            function heatMapColorforValue(value) {
+              var h = value * 240
+              return "hsl(" + h + ", 100%, 50%)";
+            }
+
+            map.data.setStyle(function(feature) {
+              var pct = feature.getProperty('prec_2012');
+              if (mapType === 'TURNOUT') {
+                return {
+                  fillColor: (HEAT[pct] && HEAT[pct][0]) ? heatMapColorforValue((HEAT[pct][0] - 0) / (1 - 0)) : 'black',
+                  clickable: true,
+                };
+              }
+              if (mapType === 'WINLOSE') {
+                return {
+                  fillColor: (HEAT[pct] && HEAT[pct][0]) ? heatMapColorforValue(HEAT[pct][3] ? 1 : 0) : 'black',
+                  clickable: true,
+                };
+              }
+              return {
+                // fillColor: (HEAT[pct] && HEAT[pct][0])  ? heatMapColorforValue((HEAT[pct][0] - 0) / (1 - 0)) : 'black',
+                fillColor: (HEAT[pct] && HEAT[pct][0]) ? heatMapColorforValue((HEAT[pct][0] - min) / (max - min)) : 'black',
+                clickable: true,
+              };
+            });
+
+            const qsCon = contests.indexOf(contestName) ? `e=${contests.indexOf(contestName)}` : '';
+            const qsCan = candidates.indexOf(selectedCandidate) !== 0 ? `c=${data.__META__.candidates.indexOf(selectedCandidate)}` : '';
+            const qsSup = supervisorDistricts.size ? `s=${[...supervisorDistricts].join(',')}` : '';
+            const qsAss = assemblyDistrict.size ? `a=${[...assemblyDistrict].join(',')}` : '';
+            const qsNei = neighborhood.size ? `n=${[...neighborhood].join(',')}` : '';
+            const qsTyp = mapType === 'SUPPORT' ? null : `t=${mapType}`;
+            const params = [qsTyp, qsCon, qsCan, qsSup, qsAss, qsNei].filter(Boolean).join('&');
+            const url = `${location.pathname}${params ? '?' : ''}${params}`;
+            window.history.replaceState({}, '', url);
+            document.getElementById('fb-share').setAttribute('href', `https://www.facebook.com/sharer/sharer.php?u=${window.location.origin}${encodeURIComponent(url)}`)
+            document.getElementById('twtr-share').setAttribute('href', `//twitter.com/intent/tweet?hashtags=universeapp&related=universeapp&text=Local%20politics%20matter&url=${window.location.origin}${encodeURIComponent(url)}`)
+          }
+
+          // The map.
+          map = new google.maps.Map(document.getElementById('map'), {
+            gestureHandling: "greedy",
+            draggable: true,
+            zoom: 13,
+            center: CENTROID,
+            disableDefaultUI: true,
+            clickableIcons: false,
+          });
+
+          map.data.loadGeoJson('https://cdn.universe.app/geojson/usa/06/75/precincts.geojson');
+          map.data.setStyle({
+            fillColor: 'transparent',
+            strokeOpacity: 0.25,
+            strokeWeight: 0.25,
+          });
+
+          requestAnimationFrame(color);
+
+          map.data.addListener('mouseover', function(event) {
+            let contest = data[contestName];
+            const pct = event.feature.getProperty('prec_2012');
+            if (mapType === 'TURNOUT') {
+              document.getElementById('touchPad').textContent = `PCT ${pct}: ${contest[pct].turnout[selectedCandidate] || 0}/${pctMeta[pct].registration[selectedCandidate] || 0} (${((HEAT[pct][0] || 0) * 100).toFixed(2) + '%'})`;
+            }
+            else {
+              document.getElementById('touchPad').textContent = `PCT ${pct}: ${contest[pct][selectedCandidate] || 0}/${contest[pct].turnout.all || 0} (${((HEAT[pct][0] || 0) * 100).toFixed(2) + '%'})`;
+              // document.getElementById('touchPad').textContent = `PCT ${pct}: ${contest[pct][selectedCandidate] || 0}/${contest[pct].turnout.all || 0} (${((HEAT[pct][0] || 0) * 100).toFixed(2) + '%'}) Reg: ${pctMeta[pct].registration.all} (${(((contest[pct].turnout.all || 0) / (pctMeta[pct].registration.all || 1)) * 100).toFixed(2)}%)`;
+            }
+          });
+
+          map.data.addListener('mouseout', function(event) {
+            const pct = event.feature.getProperty('prec_2012');
+            document.getElementById('touchPad').textContent = `March 3rd 2020 San Francisco Primary`;
+          });
+
+          // Try HTML5 geolocation.
+          let marker = null;
+          let latestPos = null;
+          let focus = 'SF'
+          function updatePosition(position){
+            latestPos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            marker = marker || new google.maps.Marker({
+              position: latestPos,
+              icon: {
+                scaledSize: new google.maps.Size(32, 32),
+                size: new google.maps.Size(32, 32),
+                url: document.getElementById('position').src,
+              },
+              map
+            });
+            marker.setPosition(latestPos);
+          }
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+              updatePosition(position);
+              navigator.geolocation.watchPosition(updatePosition, function() {
+                handleLocationError(true, map.getCenter());
+              });
+            });
+          }
+          else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, map.getCenter());
+          }
+
+          document.getElementById('center').addEventListener('click', () => {
+            if (!latestPos || focus === 'ME') {
+              map.setZoom(13);
+              map.panTo(CENTROID);
+              focus = 'SF';
+            }
+            else {
+              map.setZoom(16);
+              map.panTo(latestPos);
+              map.panBy(0, (document.body.clientHeight / 8) + (isIos() ? 75 : 0));
+              focus = 'ME';
+            }
+          });
+        }
+
+        document.addEventListener('gesturestart', (e) => e.preventDefault());
+
+        document.body.addEventListener('scroll', (e) => {
+          if (e.target && (e.target.id === 'main' || e.target.id === 'list')) {
+            return true;
+          }
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          document.body.scrollTop = 0;
+          return false;
+        }, true);
+
+        if (isIos()) {
+          document.body.classList.add('ios');
+        }
+
+        function handleLocationError(browserHasGeolocation, pos) {
+          alert(browserHasGeolocation ? 'Error: The Geolocation service failed.' : 'Error: Your browser doesn\'t support geolocation.');
+        }
+
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq_fAHf_uUBs9gXCAseIZVZl2shvHwGD0&callback=initMap"></script>
+  </body>
+</html>
