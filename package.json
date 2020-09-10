@@ -1,6 +1,11 @@
 {
+  "scripts": {
+    "start": "hoist serve src",
+    "build": "node index.js"
+  },
   "dependencies": {
     "fs-extra": "^8.1.0",
-    "glob": "^7.1.6"
+    "glob": "^7.1.6",
+    "@cannery/hoist": "^0.0.18"
   }
 }
