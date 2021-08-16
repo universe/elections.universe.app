@@ -1,2 +1,4 @@
 node_modules
 gcloud.json
+tmp
+.DS_Store

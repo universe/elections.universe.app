@@ -1,11 +1,15 @@
 {
   "scripts": {
     "start": "hoist serve src",
-    "build": "node index.js"
+    "build": "node --max-old-space-size=8192 compute.js"
   },
   "dependencies": {
+    "@cannery/hoist": "^0.0.18",
+    "adm-zip": "^0.4.16",
     "fs-extra": "^8.1.0",
     "glob": "^7.1.6",
-    "@cannery/hoist": "^0.0.18"
+    "request-promise": "^4.2.6",
+    "unzip": "^0.1.11",
+    "unzipper": "^0.10.11"
   }
 }

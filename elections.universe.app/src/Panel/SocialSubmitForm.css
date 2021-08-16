@@ -1,0 +1,175 @@
+.email-form {
+  display: flex;
+  align-self: center;
+  width: 100%;
+}
+
+.email-form__name-input {
+  appearance: none;
+  font-size: 1.4rem;
+  border-radius: 0;
+  box-shadow: var(--elevation-2);
+  background-color: var(--white);
+  border: 0;
+  padding: 0.8rem;
+  border-right: 1px solid var(--light-gray);
+  flex-grow: 1;
+  width: 0;
+  background-color:  white;
+  border: 1px solid var(--blue);
+}
+
+.email-form__name-input:first-of-type {
+  border-radius: 1.8rem 0 0 1.8rem;
+  padding: 0.8rem 1.2rem;
+  margin-left: 2px;
+  margin-right: -1px;
+}
+
+.email-form__input {
+  appearance: none;
+  font-size: 1.4rem;
+  border-radius: 0;
+  box-shadow: var(--elevation-2);
+  background-color:  white;
+  border: 1px solid var(--blue);
+  padding: 0.8rem;
+  width: 0;
+  flex-grow: 2;
+  margin-left: -1px;
+}
+.email-form__submit {
+  border-radius: 0 1.8rem 1.8rem 0;
+  background-color: var(--blue);
+  padding: 0.8rem 1.2rem;
+  box-shadow: var(--elevation-2);
+  padding: 0.8rem 1.2rem;
+  font-size: 1.4rem;
+  color: white;
+  border: 0;
+  font-weight: bold;
+  cursor: pointer;
+}
+.email-form label.email-form__success {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 1.6rem;
+  display: none;
+}
+
+.email-form.submitted input, .email-form.submitted button {
+  display: none;
+}
+
+.email-form.submitted label.email-form__success {
+  display: flex;
+}
+
+.twtr-btn, .fb-btn {
+  font-family: sans-serif;
+  box-shadow: var(--elevation-2);
+  width: auto;
+  margin: 1rem auto 1rem;
+  padding: 0px 8px 0 24px;
+  position: relative;
+  display: inline-block;
+  height: 24px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  color: #333;
+  text-decoration: none;
+  line-height: 22px;
+  font-weight: bold;
+  background-color: #1b95e0;
+  border: #1b95e0 solid 1px;
+  border-radius: 3px;
+  cursor: pointer;
+  overflow: hidden;
+  color: white;
+  position: relative;
+  z-index: 1;
+  margin-left: 8px;
+  /* min-width: 66px; */
+}
+.fb-btn {
+  background-color: #4267b2;
+  border-color: #4267b2;
+}
+.fb-btn::before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 4px;
+  margin-top: -8px;
+  background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTc5MiIgaGVpZ2h0PSIxNzkyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgoKIDxnPgogIDx0aXRsZT5iYWNrZ3JvdW5kPC90aXRsZT4KICA8cmVjdCBmaWxsPSJub25lIiBpZD0iY2FudmFzX2JhY2tncm91bmQiIGhlaWdodD0iNDAyIiB3aWR0aD0iNTgyIiB5PSItMSIgeD0iLTEiLz4KIDwvZz4KIDxnPgogIDx0aXRsZT5MYXllciAxPC90aXRsZT4KICA8cGF0aCBmaWxsPSIjZmZmZmZmIiBpZD0ic3ZnXzEiIGQ9Im0xNTc5LDEyOHEzNSwwIDYwLDI1dDI1LDYwbDAsMTM2NnEwLDM1IC0yNSw2MHQtNjAsMjVsLTM5MSwwbDAsLTU5NWwxOTksMGwzMCwtMjMybC0yMjksMGwwLC0xNDhxMCwtNTYgMjMuNSwtODR0OTEuNSwtMjhsMTIyLC0xbDAsLTIwN3EtNjMsLTkgLTE3OCwtOXEtMTM2LDAgLTIxNy41LDgwdC04MS41LDIyNmwwLDE3MWwtMjAwLDBsMCwyMzJsMjAwLDBsMCw1OTVsLTczNSwwcS0zNSwwIC02MCwtMjV0LTI1LC02MGwwLC0xMzY2cTAsLTM1IDI1LC02MHQ2MCwtMjVsMTM2NiwweiIvPgogPC9nPgo8L3N2Zz4=");
+  background-size: 16px;
+  background-repeat: no-repeat;
+}
+.twtr-btn::before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 4px;
+  margin-top: -9px;
+  background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYuNjkzIiBoZWlnaHQ9IjU2LjY5MyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KCiA8Zz4KICA8dGl0bGU+YmFja2dyb3VuZDwvdGl0bGU+CiAgPHJlY3QgZmlsbD0ibm9uZSIgaWQ9ImNhbnZhc19iYWNrZ3JvdW5kIiBoZWlnaHQ9IjQwMiIgd2lkdGg9IjU4MiIgeT0iLTEiIHg9Ii0xIi8+CiA8L2c+CiA8Zz4KICA8dGl0bGU+TGF5ZXIgMTwvdGl0bGU+CiAgPHBhdGggZmlsbD0iI2ZmZmZmZiIgaWQ9InN2Z18xIiBkPSJtNTIuODM3LDE1LjA2NWMtMS44MTEsMC44MDUgLTMuNzYsMS4zNDggLTUuODA1LDEuNTkxYzIuMDg4LC0xLjI1IDMuNjg5LC0zLjIzIDQuNDQ0LC01LjU5MmMtMS45NTMsMS4xNTkgLTQuMTE1LDIgLTYuNDE4LDIuNDU0Yy0xLjg0MywtMS45NjQgLTQuNDcsLTMuMTkyIC03LjM3NywtMy4xOTJjLTUuNTgxLDAgLTEwLjEwNiw0LjUyNSAtMTAuMTA2LDEwLjEwN2MwLDAuNzkxIDAuMDg5LDEuNTYyIDAuMjYyLDIuMzAzYy04LjQsLTAuNDIyIC0xNS44NDgsLTQuNDQ1IC0yMC44MzMsLTEwLjU2Yy0wLjg3LDEuNDkyIC0xLjM2OCwzLjIyOCAtMS4zNjgsNS4wODJjMCwzLjUwNiAxLjc4NCw2LjYgNC40OTYsOC40MTJjLTEuNjU2LC0wLjA1MyAtMy4yMTUsLTAuNTA4IC00LjU3OCwtMS4yNjVjLTAuMDAxLDAuMDQyIC0wLjAwMSwwLjA4NSAtMC4wMDEsMC4xMjhjMCw0Ljg5NiAzLjQ4NCw4Ljk4IDguMTA4LDkuOTFjLTAuODQ4LDAuMjMgLTEuNzQxLDAuMzU0IC0yLjY2MywwLjM1NGMtMC42NTIsMCAtMS4yODUsLTAuMDYzIC0xLjkwMiwtMC4xODJjMS4yODcsNC4wMTUgNS4wMTksNi45MzggOS40NDEsNy4wMTljLTMuNDU5LDIuNzExIC03LjgxNiw0LjMyNyAtMTIuNTUyLDQuMzI3Yy0wLjgxNSwwIC0xLjYyLC0wLjA0OCAtMi40MTEsLTAuMTQyYzQuNDc0LDIuODY5IDkuNzg2LDQuNTQxIDE1LjQ5Myw0LjU0MWMxOC41OTEsMCAyOC43NTYsLTE1LjQgMjguNzU2LC0yOC43NTZjMCwtMC40MzggLTAuMDA5LC0wLjg3NSAtMC4wMjgsLTEuMzA5YzEuOTc0LC0xLjQyMiAzLjY4OCwtMy4yMDMgNS4wNDIsLTUuMjN6Ii8+CiA8L2c+Cjwvc3ZnPg==") 1px center no-repeat;
+  background-size: 16px;
+}
+
+.social-bar {
+  display: flex;
+  overflow: hidden;
+  flex-flow: column;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  transition: height .28s, padding .28s, margin .28s, border .28s;
+}
+
+.social-bar.open {
+  height: 103px;
+}
+
+.map__social-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.map__social-label span {
+  flex-grow: 1;
+}
+
+@media (max-width: 51.2rem) {
+  .email-form, .social-bar {
+    display: none;
+  }
+  .email-form__input {
+    flex-grow: 1.5;
+    font-size: 1.2rem;
+  }
+  .email-form__name-input {
+    font-size: 1.2rem;
+  }
+
+  .email-form__submit {
+    font-size: 0;
+    color: transparent;
+    width: 3.8rem;
+  }
+  .email-form__submit::before {
+    content: "";
+    width: 0;
+    height: 0;
+    border: 0.6rem solid transparent;
+    border-left-color: white;
+    margin-right: -0.6rem;
+  }
+
+}
