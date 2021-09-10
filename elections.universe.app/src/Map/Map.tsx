@@ -4,7 +4,7 @@ declare global {
   interface Window { google: any; initMap: any; }
 }
 
-const PRECINCTS_GEOJSON_URL = 'https://cdn.universe.app/geojson/usa/06/75/precincts.geojson';
+const PRECINCTS_GEOJSON_URL = 'https://cdn.universe.app/geojson/usa/06/75/precincts_2012.geojson';
 const MAP_CENTER = { lat: 37.7650, lng: -122.4000, };
 const INITIAL_ZOOM = 13;
 

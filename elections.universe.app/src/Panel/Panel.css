@@ -534,6 +534,7 @@ select {
 
 .toggle__label-first, .toggle input + label.toggle__label:first-of-type { border-radius: 6px 0 0 6px; }
 .toggle__label-last, .toggle input + label.toggle__label:last-of-type { border-radius: 0 6px 6px 0; }
+.toggle__label-last, .toggle input + label.toggle__label:first-of-type:last-of-type { border-radius: 6px; }
 
 .toggle input:hover + label {border-color: var(--blue);}
 .toggle input:checked + label {

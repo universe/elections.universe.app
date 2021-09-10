@@ -30,7 +30,8 @@ const App = () => {
 
   useEffect(() => {
     (async () => {
-      setData(await (await fetch(`https://elections.universe.app/data.json?q=${Math.floor(Math.random() * 10000000)}`)).json());
+      // setData(await (await fetch(`https://elections.universe.app/data.json?q=${Math.floor(Math.random() * 10000000)}`)).json());
+      setData(await (await fetch(`./data.json?q=${Math.floor(Math.random() * 10000000)}`)).json());
       setPrecinctMeta(await (await fetch('./precincts.json')).json());
       setIsLoading(false)
     })()
